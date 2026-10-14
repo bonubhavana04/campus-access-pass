@@ -25,8 +25,8 @@ Approver	Review pending requests and approve or reject them
 Verifier	Validate an access pass for a resource
 Admin	Manage resources, revoke passes, and review audit logs and security alerts
 
-## Technology Stack
-# Backend
+# Technology Stack
+## Backend
 - Node.js
 - Express
 - MySQL
@@ -39,10 +39,10 @@ Admin	Manage resources, revoke passes, and review audit logs and security alerts
 - Express Rate Limit
 - dotenv
 
-# Frontend
+## Frontend
 - React and Vite, subject to confirmation against the committed frontend package and source files
 
-# Application Workflow
+## Application Workflow
 1. A student selects a campus resource and submits an access request for a specified time window.
 2. An authorized approver reviews the request.
 3. If approved, the system creates a time-limited access pass.
@@ -50,7 +50,7 @@ Admin	Manage resources, revoke passes, and review audit logs and security alerts
 5. The backend checks the pass status, validity period, and resource status before returning an access decision.
 6. Verification attempts and relevant administrative actions are recorded for auditing.
 
-# Database Design
+## Database Design
 The MySQL database uses the following tables:
 - users: accounts, password hashes, and roles
 - resources: campus facilities and their active status
@@ -61,8 +61,8 @@ The MySQL database uses the following tables:
 
 The schema is available in database/schema.sql.
 
-## Getting Started
-# Prerequisites
+# Getting Started
+## Prerequisites
 - Node.js and npm
 - MySQL Server
 - Git
