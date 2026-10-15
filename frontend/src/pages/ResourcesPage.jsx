@@ -2,6 +2,7 @@ import { useReducer, useEffect, useState } from 'react'
 import { api } from '../lib/api'
 import Alert from '../components/Alert'
 import Spinner from '../components/Spinner'
+import DateTimePicker from '../components/DateTimePicker'
 import { IconSearch, IconMapPin, IconTag, IconBuilding, IconRefresh, IconX, IconArrowRight } from '../components/Icons'
 
 function toISOWithOffset(localDatetime) {
@@ -26,8 +27,6 @@ function RequestModal({ resource, onClose }) {
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
   const [loading, setLoading] = useState(false)
-
-  function set(field) { return (e) => setForm((f) => ({ ...f, [field]: e.target.value })) }
 
   async function handleSubmit(e) {
     e.preventDefault()
@@ -57,8 +56,8 @@ function RequestModal({ resource, onClose }) {
   }
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-50 px-4" style={{ background: 'rgba(0,0,0,0.75)', backdropFilter: 'blur(8px)' }} onClick={(e) => e.target === e.currentTarget && onClose()}>
-      <div className="w-full max-w-md rounded-2xl overflow-hidden" style={{ background: '#1c1a3f', border: '1px solid rgba(255,255,255,0.1)', boxShadow: '0 25px 60px rgba(0,0,0,0.6)' }}>
+    <div className="fixed inset-0 flex items-center justify-center z-50 px-4" style={{ background: 'rgba(0,0,0,0.75)', backdropFilter: 'blur(8px)' }} onMouseDown={(e) => e.target === e.currentTarget && onClose()}>
+      <div className="w-full max-w-md rounded-2xl" style={{ background: '#1c1a3f', border: '1px solid rgba(255,255,255,0.1)', boxShadow: '0 25px 60px rgba(0,0,0,0.6)', overflow: 'visible' }}>
         {/* Header */}
         <div className="flex items-start justify-between p-6" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
           <div>
@@ -85,18 +84,23 @@ function RequestModal({ resource, onClose }) {
           {!success ? (
             <form onSubmit={handleSubmit} noValidate className="space-y-4">
               <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <label htmlFor="startTime" className="cap-label">Start</label>
-                  <input id="startTime" type="datetime-local" required value={form.startTime} onChange={set('startTime')} className="cap-input text-xs" />
-                </div>
-                <div>
-                  <label htmlFor="endTime" className="cap-label">End</label>
-                  <input id="endTime" type="datetime-local" required value={form.endTime} onChange={set('endTime')} className="cap-input text-xs" />
-                </div>
+                <DateTimePicker
+                  id="startTime"
+                  label="Start"
+                  value={form.startTime}
+                  onChange={(v) => setForm((f) => ({ ...f, startTime: v }))}
+                />
+                <DateTimePicker
+                  id="endTime"
+                  label="End"
+                  value={form.endTime}
+                  onChange={(v) => setForm((f) => ({ ...f, endTime: v }))}
+                  minValue={form.startTime}
+                />
               </div>
               <div>
                 <label htmlFor="purpose" className="cap-label">Purpose</label>
-                <textarea id="purpose" required rows={3} value={form.purpose} onChange={set('purpose')} placeholder="Describe the reason for access…" className="cap-input resize-none" />
+                <textarea id="purpose" required rows={3} value={form.purpose} onChange={(e) => setForm((f) => ({ ...f, purpose: e.target.value }))} placeholder="Describe the reason for access…" className="cap-input resize-none" />
               </div>
               <div className="flex gap-3 pt-1">
                 <button type="submit" disabled={loading} className="cap-btn-primary flex-1">
