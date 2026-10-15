@@ -56,8 +56,8 @@ function RequestModal({ resource, onClose }) {
   }
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-50 px-4" style={{ background: 'rgba(0,0,0,0.75)', backdropFilter: 'blur(8px)' }} onMouseDown={(e) => e.target === e.currentTarget && onClose()}>
-      <div className="w-full max-w-md rounded-2xl" style={{ background: '#1c1a3f', border: '1px solid rgba(255,255,255,0.1)', boxShadow: '0 25px 60px rgba(0,0,0,0.6)', overflow: 'visible' }}>
+    <div className="fixed inset-0 flex items-center justify-center z-50 px-4 py-6" style={{ background: 'rgba(0,0,0,0.75)', backdropFilter: 'blur(8px)', overflowY: 'auto' }} onMouseDown={(e) => e.target === e.currentTarget && onClose()}>
+      <div className="w-full max-w-md rounded-2xl" style={{ background: '#1c1a3f', border: '1px solid rgba(255,255,255,0.1)', boxShadow: '0 25px 60px rgba(0,0,0,0.6)', overflow: 'visible', flexShrink: 0 }}>
         {/* Header */}
         <div className="flex items-start justify-between p-6" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
           <div>
